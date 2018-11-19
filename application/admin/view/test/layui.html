@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>开始使用layui</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+</head>
+<body>
+
+
+<div class="layui-container">
+    <div class="layui-row">
+        <div class="layui-col-md6 layui-bg-red">
+            sad撒多撒多
+        </div>
+        <div class="layui-col-md6 layui-bg-green ">
+            苏打水法第三方第三方
+        </div>
+        <span class="layui-icon layui-icon-tips" style="font-size: 20px; color: #1E9FFF;">
+        </span>
+
+
+
+        <div class="layui-anim layui-anim-up" style="color: #00FFFF ;width: 500px;height: 500px;background-color: #0000FF">
+
+        </div>
+
+    </div>
+</div>
+
+
+
+<script src="/static/layui/layui.js"></script>
+<script>
+    //一般直接写在一个js文件中
+    layui.use(['layer', 'form'], function(){
+        var layer = layui.layer
+            ,form = layui.form;
+
+        //layer.msg('Hello World');
+    });
+</script>
+</body>
+</html>
