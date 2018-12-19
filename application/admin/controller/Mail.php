@@ -1,85 +1,63 @@
 <?php
 
 namespace app\admin\controller;
-
+//
+//
 use think\Controller;
-use think\Request;
-
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+//
 class Mail extends Controller
 {
-    /**
-     * 显示资源列表
-     *
-     * @return \think\Response
-     */
+    //发送邮箱验证码
     public function index()
     {
-        //
+        $toemail = 'phpmike@163.com';//定义收件人的邮箱
+
+        $mail = new PHPMailer();
+        //echo "<pre/>";var_dump(888);die;
+        $mail->isSMTP();// 使用SMTP服务
+        $mail->CharSet = "utf8";// 编码格式为utf8，不设置编码的话，中文会出现乱码
+        $mail->Host = "smtp.qq.com";// 发送方的SMTP服务器地址
+        $mail->SMTPAuth = true;// 是否使用身份验证
+        $mail->Username = "825166808@qq.com";// 发送方的QQ邮箱用户名，就是自己的邮箱名
+        $mail->Password = "aylsaxppqbzlbfib";// 发送方的邮箱密码，不是登录密码,是qq的第三方授权登录码,要自己去开启,在邮箱的设置->账户->POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务 里面
+        $mail->SMTPSecure = "tls";// 使用ssl协议方式,
+        $mail->Port = 587;// QQ邮箱的ssl协议方式端口号是465/587
+
+        $mail->setFrom("825166808@qq.com","通哥");// 设置发件人信息，如邮件格式说明中的发件人,
+        $mail->addAddress($toemail,'xxxxx');// 设置收件人信息，如邮件格式说明中的收件人
+        $mail->addReplyTo("825166808@qq.com","Reply");// 设置回复人信息，指的是收件人收到邮件后，如果要回复，回复邮件将发送到的邮箱地址
+        //$mail->addCC("xxx@163.com");// 设置邮件抄送人，可以只写地址，上述的设置也可以只写地址(这个人也能收到邮件)
+        //$mail->addBCC("xxx@163.com");// 设置秘密抄送人(这个人也能收到邮件)
+        //$mail->addAttachment("bug0.jpg");// 添加附件
+
+
+        $mail->Subject = "这是一个测试邮件";// 邮件标题
+        $mail->Body = "邮件内容是 <b>我就是玩玩</b>，哈哈哈！";// 邮件正文
+        //$mail->AltBody = "This is the plain text纯文本";// 这个是设置纯文本方式显示的正文内容，如果不支持Html方式，就会用到这个，基本无用
+
+        if(!$mail->send()){// 发送邮件
+            echo "发送失败";
+            echo "错误信息为----: ".$mail->ErrorInfo;// 输出错误信息
+        }else{
+                echo '发送成功';
+        }
     }
 
-    /**
-     * 显示创建资源表单页.
-     *
-     * @return \think\Response
-     */
-    public function create()
+    //test
+    public function test()
     {
-        //
+        $str=[
+            55,
+            88,
+            99
+        ];
+        $res=file_put_contents('../runtime/test/1.txt',$str);
+        echo "<pre>";var_dump($res);die;
     }
 
-    /**
-     * 保存新建的资源
-     *
-     * @param  \think\Request  $request
-     * @return \think\Response
-     */
-    public function save(Request $request)
-    {
-        //
-    }
 
-    /**
-     * 显示指定的资源
-     *
-     * @param  int  $id
-     * @return \think\Response
-     */
-    public function read($id)
-    {
-        //
-    }
-
-    /**
-     * 显示编辑资源表单页.
-     *
-     * @param  int  $id
-     * @return \think\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * 保存更新的资源
-     *
-     * @param  \think\Request  $request
-     * @param  int  $id
-     * @return \think\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * 删除指定资源
-     *
-     * @param  int  $id
-     * @return \think\Response
-     */
-    public function delete($id)
-    {
-        //
-    }
 }
+
+
